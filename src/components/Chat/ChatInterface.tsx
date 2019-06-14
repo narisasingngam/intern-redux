@@ -5,13 +5,15 @@ interface ChatInterfaceProps {
   userName: string;
   onSendMessage: (message: string) => void;
   onMessageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClearMessage: () => void;
 }
 
 const ChatInterface: React.SFC<ChatInterfaceProps> = ({
   userName,
   message,
   onMessageChange,
-  onSendMessage
+  onSendMessage,
+  onClearMessage
 }) => {
   function keyPress(e: React.KeyboardEvent<any>) {
     if (e.key === "Enter") {
@@ -34,6 +36,7 @@ const ChatInterface: React.SFC<ChatInterfaceProps> = ({
         placeholder="Type a message..."
       />
       <button onClick={send}>Send</button>
+      <button onClick={onClearMessage}>clear</button>
     </div>
   );
 };
