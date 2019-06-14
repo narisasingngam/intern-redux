@@ -1,12 +1,11 @@
 import React from 'react';
 import LoginPanel from '../components/LoginPanel';
 import { connect } from 'react-redux';
-import { AppState } from '../store/configureStore';
-import { loggedIn } from '../store/system/actions';
+import { login } from '../store/system/actions';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 interface DispathchToProps{
-    loggedIn: (userName:string) => void;
+    login: (userName:string) => void;
 }
 type LoginPageProp = DispathchToProps & RouteComponentProps;
 const LoginPage: React.FunctionComponent<LoginPageProp> = (props) => {
@@ -16,8 +15,8 @@ const LoginPage: React.FunctionComponent<LoginPageProp> = (props) => {
     };
     const handleLogin = (userName:string) =>{
         // call login api
-        props.loggedIn(userName);
-        props.history.push('/chat');
+        props.login(userName);
+        // props.history.push('/chat');
     }
     return (
         <div>
@@ -31,7 +30,7 @@ const LoginPage: React.FunctionComponent<LoginPageProp> = (props) => {
     }
 const mapDispatchToProps = (dispathch: Function):DispathchToProps =>{
     return {
-        loggedIn: (userName:string) => dispathch(loggedIn(userName)),
+        login: (userName:string) => dispathch(login(userName)),
     };
 };
 export default connect(undefined,mapDispatchToProps)(withRouter(LoginPage));
